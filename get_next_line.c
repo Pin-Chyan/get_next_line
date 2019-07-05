@@ -1,30 +1,67 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line6.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pitsai <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/21 20:12:25 by pitsai            #+#    #+#             */
-/*   Updated: 2019/06/21 20:40:13 by pitsai           ###   ########.fr       */
+/*   Created: 2019/07/05 16:27:51 by pitsai            #+#    #+#             */
+/*   Updated: 2019/07/06 01:55:21 by pitsai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static t_list	*get_correct_file(t_list **file, int fd)
+static int         newline(char **s, char **line, int fd, int ret)
 {
-	t_list	*tmp;
+    char       *tmp;
+    int         len;
 
-	tmp = *file;
-	while (tmp)
-	{
-		if ((int)tmp->content_size == fd)
-			return (tmp);
-		tmp = tmp->next;
-	}
-	tmp = ft_lstnew("\0", fd);
-	ft_listadd(file, tmp);
-	tmp = *file;
-	return (tmp);
+    len = 0;
+    while ((s[fd][len]) != '\n' && (s[fd][len] != '\0'))
+        len++;
+    if (s[fd][len] == '\n')
+    {
+        *line = ft_strsub(s[fd], 0, len);
+        tmp = ft_strdup(s[fd] + len + 1);
+        free(s[fd]);
+        s[fd] = tmp;
+        if (s[fd][0] == '\0')
+            ft_strdel(&s[fd]);
+    }
+    else if  (s[fd][len])
+    {
+        if (ret == BUFF_SIZE)
+            return (get_next_line(fd, line));
+            *line = ft_strdup(s[fd]);
+            ft_strdel(&s[fd]);
+    }
+    return (1);
+}
+
+int         get_next_line(const int fd, char **line)
+{
+    static char *s[255];
+    char        buf[BUFF_SIZE + 1];
+    char        *tmp;
+    int         ret;
+
+    if (fd < 0 || line == NULL)
+        return (-1);
+    while ((ret = read(fd, buf, BUFF_SIZE)) > 0)
+    {
+        buf[ret] = '\0';
+        if (s[fd] == NULL)
+            s[fd] = ft_strnew(1);
+        tmp = ft_strjoin(s[fd], buf);
+        s[fd] = tmp;
+		free (s[fd]);
+        if (ft_strchr(buf, '\n'))
+            break;
+    }
+    if (ret < 0)
+        return (-1);
+    else if (ret == 0 && (s[fd] == NULL || s[fd][0] == '\0'))
+        return (0);
+    return (newline(s, line, fd, ret));
 }
