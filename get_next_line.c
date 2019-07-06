@@ -29,7 +29,7 @@ static int         newline(char **s, char **line, int fd, int ret)
         if (s[fd][0] == '\0')
             ft_strdel(&s[fd]);
     }
-    else if  (s[fd][len])
+    else if  (s[fd][len] == '\0')
     {
         if (ret == BUFF_SIZE)
             return (get_next_line(fd, line));
@@ -54,8 +54,8 @@ int         get_next_line(const int fd, char **line)
         if (s[fd] == NULL)
             s[fd] = ft_strnew(1);
         tmp = ft_strjoin(s[fd], buf);
+        free(s[fd]);
         s[fd] = tmp;
-		free (s[fd]);
         if (ft_strchr(buf, '\n'))
             break;
     }
