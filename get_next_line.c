@@ -6,16 +6,16 @@
 /*   By: pitsai <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/05 16:27:51 by pitsai            #+#    #+#             */
-/*   Updated: 2019/07/06 02:57:54 by pitsai           ###   ########.fr       */
+/*   Updated: 2019/07/06 03:03:20 by pitsai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static int         newline(char **s, char **line, int fd, int ret)
+static int			newline(char **s, char **line, int fd, int ret)
 {
-	char       *tmp;
-	int         len;
+	char			*tmp;
+	int				len;
 
 	len = 0;
 	while ((s[fd][len]) != '\n' && (s[fd][len] != '\0'))
@@ -29,7 +29,7 @@ static int         newline(char **s, char **line, int fd, int ret)
 		if (s[fd][0] == '\0')
 			ft_strdel(&s[fd]);
 	}
-	else if  (s[fd][len] == '\0')
+	else if (s[fd][len] == '\0')
 	{
 		if (ret == BUFF_SIZE)
 			return (get_next_line(fd, line));
@@ -39,12 +39,12 @@ static int         newline(char **s, char **line, int fd, int ret)
 	return (1);
 }
 
-int         get_next_line(const int fd, char **line)
+int					get_next_line(const int fd, char **line)
 {
-	static char *s[255];
-	char        buf[BUFF_SIZE + 1];
-	char        *tmp;
-	int         ret;
+	static char		*s[255];
+	char			buf[BUFF_SIZE + 1];
+	char			*tmp;
+	int				ret;
 
 	if (fd < 0 || line == NULL)
 		return (-1);
@@ -57,7 +57,7 @@ int         get_next_line(const int fd, char **line)
 		free(s[fd]);
 		s[fd] = tmp;
 		if (ft_strchr(buf, '\n'))
-			break;
+			break ;
 	}
 	if (ret < 0)
 		return (-1);
