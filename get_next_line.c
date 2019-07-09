@@ -6,7 +6,7 @@
 /*   By: pitsai <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/05 16:27:51 by pitsai            #+#    #+#             */
-/*   Updated: 2019/07/08 15:51:55 by pitsai           ###   ########.fr       */
+/*   Updated: 2019/07/09 14:23:56 by pitsai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int			newline(char **s, char **line, int fd)
 	int				len;
 
 	len = 0;
-	while ((s[fd][len]) != '\n' && (s[fd][len] != '\0'))
+	while (s[fd][len] != '\n' && s[fd][len] != '\0')
 		len++;
 	if (s[fd][len] == '\n')
 	{
@@ -62,5 +62,5 @@ int					get_next_line(const int fd, char **line)
 	}
 	if (ret < 0)
 		return (-1);
-	return ((ret == 0 && (s[fd] == NULL) ? 0 : newline(s, line, fd)));
+	return ((ret == 0 && s[fd] == NULL) ? 0 : newline(s, line, fd));
 }
