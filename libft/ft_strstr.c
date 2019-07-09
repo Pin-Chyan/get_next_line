@@ -1,21 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pitsai <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/06 02:57:04 by pitsai            #+#    #+#             */
-/*   Updated: 2019/07/09 12:19:46 by pitsai           ###   ########.fr       */
+/*   Created: 2019/06/11 12:56:42 by pitsai            #+#    #+#             */
+/*   Updated: 2019/06/13 16:08:03 by pitsai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include "libft/libft.h"
+#include "libft.h"
 
-# define BUFF_SIZE 2056
+char	*ft_strstr(const char *big, const char *little)
+{
+	int	i;
+	int	j;
 
-int		get_next_line(const int fd, char **line);
-
-#endif
+	i = 0;
+	if (little[0] == '\0')
+		return ((char *)big);
+	while (big[i] != '\0')
+	{
+		j = 0;
+		while (big[i + j] == little[j])
+		{
+			if (little[j + 1] == '\0')
+			{
+				return ((char *)big + i);
+			}
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}

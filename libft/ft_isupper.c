@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_isupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pitsai <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/06 02:57:04 by pitsai            #+#    #+#             */
-/*   Updated: 2019/07/09 12:19:46 by pitsai           ###   ########.fr       */
+/*   Created: 2019/06/03 10:04:09 by pitsai            #+#    #+#             */
+/*   Updated: 2019/06/03 12:56:16 by pitsai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include "libft/libft.h"
+#include "libft.h"
 
-# define BUFF_SIZE 2056
-
-int		get_next_line(const int fd, char **line);
-
-#endif
+int		ft_isupper(int c)
+{
+	return (c >= 'A' && c <= 'Z');
+}

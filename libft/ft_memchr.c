@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pitsai <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/06 02:57:04 by pitsai            #+#    #+#             */
-/*   Updated: 2019/07/09 12:19:46 by pitsai           ###   ########.fr       */
+/*   Created: 2019/05/21 11:52:58 by pitsai            #+#    #+#             */
+/*   Updated: 2019/06/03 15:29:06 by pitsai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include "libft/libft.h"
+#include "libft.h"
 
-# define BUFF_SIZE 2056
+void	*ft_memchr(const void *s, int c, size_t n)
+{
+	const char	*sc;
+	size_t		i;
 
-int		get_next_line(const int fd, char **line);
-
-#endif
+	sc = (const char *)s;
+	i = -1;
+	while (++i < n)
+		if (*(sc + i) == (char)c)
+			return ((void *)sc + i);
+	return (NULL);
+}

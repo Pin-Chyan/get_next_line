@@ -1,21 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pitsai <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/06 02:57:04 by pitsai            #+#    #+#             */
-/*   Updated: 2019/07/09 12:19:46 by pitsai           ###   ########.fr       */
+/*   Created: 2019/05/27 11:51:23 by pitsai            #+#    #+#             */
+/*   Updated: 2019/06/18 09:31:35 by pitsai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include "libft/libft.h"
+#include "libft.h"
 
-# define BUFF_SIZE 2056
+int		ft_atoi(const char *str)
+{
+	int	i;
+	int	num;
+	int	sign;
 
-int		get_next_line(const int fd, char **line);
-
-#endif
+	i = 0;
+	num = 0;
+	sign = 1;
+	while (ft_iswhitespace(str[i]))
+		i++;
+	if (*(str + i) == '-')
+		sign = -1;
+	if (*(str + i) == '-' || *(str + i) == '+')
+		i++;
+	while (ft_isdigit(str[i]))
+	{
+		num = num * 10 + (*(str + i++) - '0');
+	}
+	return (num * sign);
+}

@@ -6,13 +6,13 @@
 /*   By: pitsai <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/05 16:27:51 by pitsai            #+#    #+#             */
-/*   Updated: 2019/07/06 03:03:20 by pitsai           ###   ########.fr       */
+/*   Updated: 2019/07/08 15:51:55 by pitsai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static int			newline(char **s, char **line, int fd, int ret)
+static int			newline(char **s, char **line, int fd)
 {
 	char			*tmp;
 	int				len;
@@ -29,10 +29,8 @@ static int			newline(char **s, char **line, int fd, int ret)
 		if (s[fd][0] == '\0')
 			ft_strdel(&s[fd]);
 	}
-	else if (s[fd][len] == '\0')
+	else
 	{
-		if (ret == BUFF_SIZE)
-			return (get_next_line(fd, line));
 		*line = ft_strdup(s[fd]);
 		ft_strdel(&s[fd]);
 	}
@@ -52,16 +50,17 @@ int					get_next_line(const int fd, char **line)
 	{
 		buf[ret] = '\0';
 		if (s[fd] == NULL)
-			s[fd] = ft_strnew(1);
-		tmp = ft_strjoin(s[fd], buf);
-		free(s[fd]);
-		s[fd] = tmp;
-		if (ft_strchr(buf, '\n'))
+			s[fd] = ft_strdup(buf);
+		else
+		{
+			tmp = ft_strjoin(s[fd], buf);
+			free(s[fd]);
+			s[fd] = tmp;
+		}
+		if (ft_strchr(s[fd], '\n'))
 			break ;
 	}
 	if (ret < 0)
 		return (-1);
-	else if (ret == 0 && (s[fd] == NULL || s[fd][0] == '\0'))
-		return (0);
-	return (newline(s, line, fd, ret));
+	return ((ret == 0 && (s[fd] == NULL) ? 0 : newline(s, line, fd)));
 }

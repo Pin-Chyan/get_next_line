@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strncat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pitsai <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/06 02:57:04 by pitsai            #+#    #+#             */
-/*   Updated: 2019/07/09 12:19:46 by pitsai           ###   ########.fr       */
+/*   Created: 2019/05/22 10:22:05 by pitsai            #+#    #+#             */
+/*   Updated: 2019/06/04 13:11:32 by pitsai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include "libft/libft.h"
+#include "libft.h"
 
-# define BUFF_SIZE 2056
+char	*ft_strncat(char *s1, const char *s2, size_t n)
+{
+	int		i;
+	int		j;
 
-int		get_next_line(const int fd, char **line);
-
-#endif
+	i = -1;
+	j = (int)ft_strlen(s1);
+	while (*(s2 + ++i) && i < (int)n)
+		*(s1 + j++) = *(s2 + i);
+	*(s1 + j) = '\0';
+	return (s1);
+}
