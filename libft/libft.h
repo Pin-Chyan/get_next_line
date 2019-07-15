@@ -22,7 +22,6 @@ void				*ft_memmove(void *dst, const void *src, size_t len);
 void				*ft_memchr(const void *s, int c, size_t n);
 void				*ft_memcpy(void *dst, const void *src, size_t n);
 void				*ft_memset(void *b, int c, size_t len);
-void				*ft_strdup(const char *src);
 int					ft_isalnum(int c);
 int					ft_isalpha(int c);
 int					ft_isascii(int c);
@@ -74,6 +73,7 @@ char				**ft_strsplit(char const *s, char c);
 char				*ft_strmap(char const *s, char (*f)(char));
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 
+char				*ft_strdup(const char *src);
 char				*ft_strndup(const char *s1, size_t n);
 
 typedef struct		s_list
